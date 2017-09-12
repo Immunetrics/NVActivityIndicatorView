@@ -65,6 +65,9 @@ public final class ActivityData {
     /// Fade out time of UI blocker.
     let fadeOutTime: Int
 
+    /// Frame of UI Blocker
+    let frame: CGRect
+
     /**
      Create information package used to display UI blocker.
 
@@ -95,7 +98,8 @@ public final class ActivityData {
                 backgroundColor: UIColor? = nil,
                 textColor: UIColor? = nil,
                 fadeInTime: Int? = nil,
-                fadeOutTime: Int? = nil) {
+                fadeOutTime: Int? = nil,
+                frame: CGRect? = nil) {
         self.size = size ?? NVActivityIndicatorView.DEFAULT_BLOCKER_SIZE
         self.message = message ?? NVActivityIndicatorView.DEFAULT_BLOCKER_MESSAGE
         self.messageFont = messageFont ?? NVActivityIndicatorView.DEFAULT_BLOCKER_MESSAGE_FONT
@@ -108,6 +112,7 @@ public final class ActivityData {
         self.textColor = textColor ?? color ?? NVActivityIndicatorView.DEFAULT_TEXT_COLOR
         self.fadeInTime = fadeInTime ?? NVActivityIndicatorView.DEFAULT_FADE_TIME
         self.fadeOutTime = fadeOutTime ?? NVActivityIndicatorView.DEFAULT_FADE_TIME
+        self.frame =  frame ?? UIScreen.main.bounds
     }
 }
 
@@ -191,7 +196,7 @@ public final class NVActivityIndicatorPresenter {
     // MARK: - Helpers
 
     private func show(with activityData: ActivityData) {
-        let containerView = UIView(frame: UIScreen.main.bounds)
+        let containerView = UIView(frame: activityData.frame)
 
         containerView.backgroundColor = activityData.backgroundColor
         containerView.restorationIdentifier = restorationIdentifier
