@@ -200,7 +200,6 @@ public final class NVActivityIndicatorPresenter {
 
         containerView.backgroundColor = activityData.backgroundColor
         containerView.restorationIdentifier = restorationIdentifier
-        containerView.translatesAutoresizingMaskIntoConstraints = false
 
         let activityIndicatorView = NVActivityIndicatorView(
             frame: CGRect(x: 0, y: 0, width: activityData.size.width, height: activityData.size.height),
@@ -242,19 +241,8 @@ public final class NVActivityIndicatorPresenter {
 
         fadeInTime = TimeInterval(Double(activityData.fadeInTime)/1000.0)
         fadeOutTime = TimeInterval(Double(activityData.fadeOutTime)/1000.0)
-
         keyWindow.addSubview(containerView)
         state = .showed
-
-        // Add constraints for `containerView`.
-        ({
-            let leadingConstraint = NSLayoutConstraint(item: keyWindow, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1, constant: 0)
-            let trailingConstraint = NSLayoutConstraint(item: keyWindow, attribute: .trailing, relatedBy: .equal, toItem: containerView, attribute: .trailing, multiplier: 1, constant: 0)
-            let topConstraint = NSLayoutConstraint(item: keyWindow, attribute: .top, relatedBy: .equal, toItem: containerView, attribute: .top, multiplier: 1, constant: 0)
-            let bottomConstraint = NSLayoutConstraint(item: keyWindow, attribute: .bottom, relatedBy: .equal, toItem: containerView, attribute: .bottom, multiplier: 1, constant: 0)
-
-            keyWindow.addConstraints([leadingConstraint, trailingConstraint, topConstraint, bottomConstraint])
-        }())
 
         if fadeInTime > 0 {
           containerView.alpha = 0
